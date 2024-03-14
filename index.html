@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess The Word</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <p>&#128161;&#x1F52E;&#129513;&#127919;</p>
+    <h1>Guess The Word</h1>
+    <br>
+    <div id="game">
+      <div id="word"></div>
+      <form>
+        <p id="letters">Enter letter</p>
+        <input type="text" maxlength="1" autofocus />
+        <br /><br />
+        <button>Click</button>
+      </form>
+      <p id="guesses">
+        You have 8 guesses remaining.
+      </p>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
