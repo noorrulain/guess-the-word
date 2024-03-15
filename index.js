@@ -38,7 +38,7 @@ const displayWord = (data) => {
 
 const checkWin = (arr) => {
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].textContent = ""){
+    if ((arr[i].textContent = "")) {
       return false;
     }
   }
@@ -71,6 +71,16 @@ form.onsubmit = (event) => {
         if (wordLetters[i] === inputtedLetter) {
           wordLetterArray[0][i].innerText = `${inputtedLetter}`;
           wordLetterArray[0][i].classList.add("guessed-letter");
+          setTimeout(() => {
+            if (
+              document.querySelectorAll(".guessed-letter").length ===
+              wordLetters.length
+            ) {
+              alert(
+                `You win!!! The word was ${randomWord}.\nRefresh to replay!`
+              );
+            }
+          }, 300);
         }
       }
     } else {
@@ -92,7 +102,4 @@ form.onsubmit = (event) => {
   }
   guessedLetterArray.push(inputtedLetter);
   input.value = "";
-  if (document.querySelectorAll(".guessed-letter").length === wordLetters.length){
-    alert(`You win!!! The word was ${randomWord}.\nRefresh to replay!`);
-  }
 };
