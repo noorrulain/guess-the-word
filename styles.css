@@ -25,6 +25,7 @@ button {
   font-size: 1rem;
   color: #ffffff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 input {
   width: 25px;

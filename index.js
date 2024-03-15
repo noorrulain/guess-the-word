@@ -58,48 +58,54 @@ form.onsubmit = (event) => {
   event.preventDefault();
   inputtedLetter = input.value.toUpperCase();
   console.log(inputtedLetter);
-  if (guessedLetterArray.includes(inputtedLetter)) {
-    numberOfGuessesText.textContent = `You already guessed this letter. Try again. ${numberOfGuesses} guesses remaining.`;
-  } else {
-    if (guessedLetterArray.length === 0) {
-      lettersGuessed.textContent = "Letters guessed: " + inputtedLetter;
+  let testRegex = /[A-Za-z]/;
+  if (testRegex.test(inputtedLetter)) {
+    if (guessedLetterArray.includes(inputtedLetter)) {
+      numberOfGuessesText.textContent = `You already guessed this letter. Try again. ${numberOfGuesses} guesses remaining.`;
     } else {
-      lettersGuessed.textContent += ", " + inputtedLetter;
-    }
-    if (wordLetters.includes(inputtedLetter)) {
-      for (let i = 0; i < wordLetters.length; i++) {
-        if (wordLetters[i] === inputtedLetter) {
-          wordLetterArray[0][i].innerText = `${inputtedLetter}`;
-          wordLetterArray[0][i].classList.add("guessed-letter");
-          setTimeout(() => {
-            if (
-              document.querySelectorAll(".guessed-letter").length ===
-              wordLetters.length
-            ) {
-              alert(
-                `You win!!! The word was ${randomWord}.\nRefresh to replay!`
-              );
-            }
-          }, 300);
-        }
+      if (guessedLetterArray.length === 0) {
+        lettersGuessed.textContent = "Letters guessed: " + inputtedLetter;
+      } else {
+        lettersGuessed.textContent += ", " + inputtedLetter;
       }
-    } else {
-      if (numberOfGuesses > 0) {
-        numberOfGuesses--;
-        if (numberOfGuesses === 0) {
-          if (
-            confirm(
-              `Game Over. The word was ${randomWord}. \nPress OK to restart.`
-            )
-          ) {
-            window.location.reload();
+      if (wordLetters.includes(inputtedLetter)) {
+        for (let i = 0; i < wordLetters.length; i++) {
+          if (wordLetters[i] === inputtedLetter) {
+            wordLetterArray[0][i].innerText = `${inputtedLetter}`;
+            wordLetterArray[0][i].classList.add("guessed-letter");
+            setTimeout(() => {
+              if (
+                document.querySelectorAll(".guessed-letter").length ===
+                wordLetters.length
+              ) {
+                alert(
+                  `You win!!! The word was ${randomWord}.\nRefresh to replay!`
+                );
+              }
+            }, 300);
           }
-        } else {
-          numberOfGuessesText.textContent = `You have ${numberOfGuesses} guesses remaining.`;
+        }
+      } else {
+        if (numberOfGuesses > 0) {
+          numberOfGuesses--;
+          if (numberOfGuesses === 0) {
+            if (
+              confirm(
+                `Game Over. The word was ${randomWord}. \nPress OK to restart.`
+              )
+            ) {
+              window.location.reload();
+            }
+          } else {
+            numberOfGuessesText.textContent = `You have ${numberOfGuesses} guesses remaining.`;
+          }
         }
       }
     }
+    guessedLetterArray.push(inputtedLetter);
+  } else {
+    numberOfGuessesText.textContent = `Guess a letter. ${numberOfGuesses} guesses remaining.`;
   }
-  guessedLetterArray.push(inputtedLetter);
+
   input.value = "";
 };
