@@ -73,6 +73,7 @@ form.onsubmit = (event) => {
           if (wordLetters[i] === inputtedLetter) {
             wordLetterArray[0][i].innerText = `${inputtedLetter}`;
             wordLetterArray[0][i].classList.add("guessed-letter");
+            //input.disabled=true;
             setTimeout(() => {
               if (
                 document.querySelectorAll(".guessed-letter").length ===
@@ -81,6 +82,9 @@ form.onsubmit = (event) => {
                 alert(
                   `You win!!! The word was ${randomWord}.\nRefresh to replay!`
                 );
+                input.disabled=true;
+                numberOfGuessesText.textContent = "Refresh to replay.";
+                button.disabled=true;
               }
             }, 300);
           }
