@@ -95,3 +95,19 @@ input {
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 1000px) {
+  .result-box {
+    width: 80%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #game button {
+    width: 70px;
+    text-align: center;
+    height: 30px;
+  }
+}
