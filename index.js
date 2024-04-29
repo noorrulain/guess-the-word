@@ -1,17 +1,30 @@
 const wordsUrl =
   "https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt";
 const numberOfGuessesText = document.querySelector("#guesses");
-const button = document.querySelector("button");
+const button = document.querySelector("#game button");
 const form = document.querySelector("form");
 const input = document.querySelector("input");
 const word = document.querySelector("#word");
 const lettersGuessed = document.querySelector("#letters");
+const modalBox = document.querySelector(".modal-box");
+const resultBox = document.querySelector(".result-box");
+const resultText = document.querySelector(".modal-box h2");
+const resultNext = document.querySelector(".modal-box p");
+const resultEmoji = document.querySelector(".modal-box span");
+const resultButton = document.querySelector(".modal-box button");
 let numberOfGuesses = 8;
 var inputtedLetter;
 var guessedLetterArray = [];
 var randomWord;
 var wordLetters;
 var wordLetterArray = [];
+
+const hideResult = () => {
+  modalBox.style.display = "none";
+};
+// resultEmoji.innerHTML = "&#127881;";
+// resultText.innerText = "You win!!!";
+// resultNext.innerText = "Refresh to replay.";
 
 const fetchWord = async () => {
   try {
@@ -45,6 +58,7 @@ const checkWin = (arr) => {
   return true;
 };
 
+hideResult();
 fetchWord();
 
 // button.addEventListener("click", () => {
@@ -73,33 +87,46 @@ form.onsubmit = (event) => {
           if (wordLetters[i] === inputtedLetter) {
             wordLetterArray[0][i].innerText = `${inputtedLetter}`;
             wordLetterArray[0][i].classList.add("guessed-letter");
+            resultButton.addEventListener("click", hideResult);
             //input.disabled=true;
             setTimeout(() => {
               if (
                 document.querySelectorAll(".guessed-letter").length ===
                 wordLetters.length
               ) {
-                alert(
-                  `You win!!! The word was ${randomWord}.\nRefresh to replay!`
-                );
-                input.disabled=true;
+                modalBox.style.display = "flex";
+                resultBox.style.backgroundColor = "#7abd7e";
+                resultEmoji.innerHTML = "&#127881;";
+                resultText.innerText = "You win!!!";
+                resultNext.innerText = "Refresh to replay.";
+                input.disabled = true;
                 numberOfGuessesText.textContent = "Refresh to replay.";
-                button.disabled=true;
+                button.disabled = true;
               }
-            }, 300);
+            }, 150);
           }
         }
       } else {
         if (numberOfGuesses > 0) {
           numberOfGuesses--;
           if (numberOfGuesses === 0) {
-            if (
-              confirm(
-                `Game Over. The word was ${randomWord}. \nPress OK to restart.`
-              )
-            ) {
+            input.disabled = true;
+            resultBox.style.backgroundColor = "#e96868";
+            modalBox.style.display = "flex";
+            resultEmoji.innerHTML = "&#128128;";
+            resultText.innerText = `Game Over. The word was ${randomWord}`;
+            resultNext.innerText = "Press OK to restart.";
+            resultButton.addEventListener("click", () => {
+              hideResult();
               window.location.reload();
-            }
+            });
+            // if (
+            //   confirm(
+            //     `Game Over. The word was ${randomWord}. \nPress OK to restart.`
+            //   )
+            // ) {
+            //   window.location.reload();
+            // }
           } else {
             numberOfGuessesText.textContent = `You have ${numberOfGuesses} guesses remaining.`;
           }

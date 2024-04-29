@@ -7,6 +7,7 @@ body {
   flex-direction: column;
   height: 95vh;
   justify-content: center;
+  overflow: hidden;
 }
 h1 {
   font-size: 3.5rem;
@@ -54,7 +55,43 @@ input {
 }
 .guessed-letter{
   background-color: #8bca84;
-  /* border: 2px solid #8bca84; */
   font-size: 1.75rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.result-box{
+  width: 30%;
+  height: 40%;
+  border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.modal-box{
+  animation-name: result-animate;
+  animation-duration: 0.5s;
+
+}
+@keyframes result-animate {
+  from {
+    display: none;
+    margin-bottom: 100%;
+  } to {
+    display: flex;
+    margin-bottom: 0%;
+  }
+}
+.result-box > p {
+  margin-top: 0;
+  font-size: 17px;
+}
+.result-box > h2 {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+.modal-box{
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
