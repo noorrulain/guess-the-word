@@ -19,6 +19,8 @@ var randomWord;
 var wordLetters;
 var wordLetterArray = [];
 
+modalBox.style.display = "none";
+
 const hideResult = () => {
   modalBox.style.display = "none";
 };
